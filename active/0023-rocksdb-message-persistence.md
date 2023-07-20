@@ -8,13 +8,13 @@
 
 ## Abstract
 
-MQTT standard specifies that the MQTT broker must store the messages of the clients that are offline.
-EMQX community edition (up to version 4) fulfilled this promise as long as all broker nodes are online, since the offline messages were stored in RAM.
-Enterprise edition allowed to store the offline messages in a external database.
+The MQTT standard specifies that the MQTT broker must store the messages of the clients that are offline.
+EMQX community edition (up to version 4) fulfilled this promise as long as all broker nodes were online, since the offline messages were stored in RAM.
+Enterprise edition allows for the storage of the offline messages in an external database.
 
 ## Motivation
 
-Basic setup of EMQX router keeps messages in RAM, which guarantees low latency and high throughput, however its message delivery guarantees have some limitations. Specifically, if the broker nodes go offline, the messages kept in memory would be lost. This could potentially cause message loss for clients.
+Basic setup of EMQX router keeps messages in RAM, which guarantees low latency and high throughput, however its message delivery guarantees have some limitations. Specifically, if the broker nodes go offline, the messages kept in memory will be lost. This could potentially cause message loss for clients.
 To address this issue and improve reliability, the EMQX team is working on implementing message persistence using an embedded database, RocksDB. This feature will store messages even when broker nodes are offline, thereby ensuring message delivery.
 
 This feature will improve message delivery guarantees of EMQX broker and make it ready for the new markets that require such guarantees.
@@ -31,9 +31,9 @@ This feature will improve message delivery guarantees of EMQX broker and make it
   This corresponds to PRAM consistency: http://jepsen.io/consistency/models/pram
 
 - Strong guarantees:
-  - messages published to the same topic by different clients are always be replayed in the same order
+  - messages published to the same topic by different clients are always replayed in the order that they were published in
 
-Initially it only makes sense to support weak guarantees, since EMQX doesn't follow the strong guarantees as of now.
+Currently, it only makes sense to support weak guarantees, since EMQX doesn't follow strong guarantees for now.
 
 It is helpful to introduce a concept of "logical FIFO" identified by `hash(publisher.clientid) ++ hash(topic)`.
 Weak consistency guarantees hold for each logical FIFO.
