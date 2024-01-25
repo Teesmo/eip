@@ -1,7 +1,7 @@
 # EMQ X Improvement Proposals (EIP)
 
-This repository contains the EMQ X Improvement Proposals (EIPs), to documentation
-the ideas, designs, or implement details of new features. All the EIPs are in
+This repository contains the EMQ X Improvement Proposals (EIPs), to document
+the ideas and/or designs, or to implement details of new features. All the EIPs are in
 Markdown (`*.md`) format.
 
 New EIPs should first go to the `active` directory by creating a pull request
